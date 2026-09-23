@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: weather-metrics-postgres
+    environment:
+      POSTGRES_DB: weather_metrics
+      POSTGRES_USER: wmsadmin
+      POSTGRES_PASSWORD: itsasecretdonttellanyone
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: weather-metrics-service
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/weather_metrics
+      SPRING_DATASOURCE_USERNAME: wmsadmin
+      SPRING_DATASOURCE_PASSWORD: itsasecretdonttellanyone
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:

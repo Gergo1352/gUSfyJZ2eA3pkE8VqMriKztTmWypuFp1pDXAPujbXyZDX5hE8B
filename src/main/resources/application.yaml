@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: weather-metrics-service
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/weather_metrics}
+    username: ${SPRING_DATASOURCE_USERNAME:wmsadmin}
+    password: ${SPRING_DATASOURCE_PASSWORD:itsasecretdonttellanyone}
+
+  flyway:
+    enabled: true
+
+logging:
+  level:
+    root: INFO
